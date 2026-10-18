@@ -1,48 +1,47 @@
 (() => {
-  const config = window.WEBCAM_BUBBLES_SITE || {};
-  const version = config.version || '1.2.4';
-  const minecraft = config.minecraft || '26.3';
-  const repo = config.repoUrl || 'https://github.com/';
-  const releases = config.releasesUrl || repo;
-  const setHref = (id, url) => { const el = document.getElementById(id); if (el) el.href = url; };
-  ['navRepo','sourceHero','footerRepo'].forEach(id => setHref(id, repo));
-  ['downloadHero','downloadPanel','downloadBottom'].forEach(id => setHref(id, releases));
-  const heroVersion = document.getElementById('heroVersion'); if (heroVersion) heroVersion.textContent = `Версия ${version} · Minecraft ${minecraft}`;
-  const releaseVersion = document.getElementById('releaseVersion'); if (releaseVersion) releaseVersion.textContent = `v${version}`;
-  const year = document.getElementById('year'); if (year) year.textContent = new Date().getFullYear();
-
-  const menuToggle = document.getElementById('menuToggle');
-  const nav = document.getElementById('nav');
-  menuToggle?.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', String(open));
-  });
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    nav.classList.remove('open'); menuToggle?.setAttribute('aria-expanded', 'false');
-  }));
-
-  const toast = document.getElementById('toast');
-  const copyStatus = document.getElementById('copyStatus');
-  let toastTimer;
-  async function copyCommand(command) {
-    try {
-      await navigator.clipboard.writeText(command);
-      if (copyStatus) copyStatus.textContent = `Скопировано: ${command}`;
-      if (toast) { toast.textContent = `Команда скопирована: ${command}`; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2200); }
-    } catch (_) {
-      if (copyStatus) copyStatus.textContent = `Выдели и скопируй вручную: ${command}`;
-      if (toast) { toast.textContent = `Команда: ${command}`; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2600); }
-    }
+  const base = window.DOZACRAFT_CONFIG || {};
+  const defaults = {
+    projectName: base.projectName || 'DozaCraft', latestVersion: base.latestVersion || '1.2.4',
+    latestMinecraft: base.latestMinecraft || '26.3', latestDownloadUrl: base.latestDownloadUrl || '#versions',
+    repositoryUrl: base.repositoryUrl || 'https://github.com/', versions: Array.isArray(base.versions) ? base.versions : []
+  };
+  const storageKey = 'dozacraft-site-settings-v1';
+  let settings = defaults;
+  try { const saved = localStorage.getItem(storageKey); if (saved) settings = {...defaults, ...JSON.parse(saved)}; } catch (_) {}
+  const $ = id => document.getElementById(id);
+  const safeUrl = (url, fallback='#versions') => { try { const u = new URL(url, location.href); return ['https:','http:'].includes(u.protocol) ? u.href : fallback; } catch (_) { return fallback; } };
+  function render() {
+    $('latestVersion').textContent = settings.latestVersion;
+    $('latestMinecraft').textContent = settings.latestMinecraft;
+    $('downloadLatest').href = safeUrl(settings.latestDownloadUrl);
+    ['repoLink','sourceLink','footerRepo'].forEach(id => $(id).href = safeUrl(settings.repositoryUrl, 'https://github.com/'));
+    $('versionRows').replaceChildren();
+    (settings.versions || []).forEach(v => {
+      const tr = document.createElement('tr');
+      [v.mod || '—', v.minecraft || '—', v.loader || 'Fabric'].forEach(value => { const td=document.createElement('td'); td.textContent=value; tr.append(td); });
+      const td=document.createElement('td'), a=document.createElement('a'); a.className='row-download'; a.textContent='Скачать ↓'; a.href=safeUrl(v.url); td.append(a); tr.append(td); $('versionRows').append(tr);
+    });
   }
-  document.querySelectorAll('.command-row').forEach(row => row.addEventListener('click', () => copyCommand(row.dataset.command || '')));
-  const search = document.getElementById('commandSearch');
-  search?.addEventListener('input', () => {
-    const query = search.value.trim().toLowerCase();
-    document.querySelectorAll('.command-row').forEach(row => { row.hidden = !row.innerText.toLowerCase().includes(query); });
+  function fillForm() {
+    $('editLatestVersion').value=settings.latestVersion; $('editLatestMinecraft').value=settings.latestMinecraft;
+    $('editLatestUrl').value=settings.latestDownloadUrl; $('editRepoUrl').value=settings.repositoryUrl;
+    $('editVersions').value=(settings.versions||[]).map(v=>`${v.mod} | ${v.minecraft} | ${v.loader||'Fabric'} | ${v.url}`).join('\n'); updateExport();
+  }
+  function parseVersions(text) { return text.split('\n').map(line=>line.trim()).filter(Boolean).map(line=>{const [mod,minecraft,loader,url]=line.split('|').map(s=>s.trim());return {mod,minecraft,loader:loader||'Fabric',url:url||'#versions'};}); }
+  function updateExport() { const cfg={...settings}; $('exportConfig').value='window.DOZACRAFT_CONFIG = '+JSON.stringify(cfg,null,2)+';'; }
+  $('adminOpen').addEventListener('click',()=>{fillForm();$('adminModal').hidden=false;});
+  $('adminClose').addEventListener('click',()=>$('adminModal').hidden=true);
+  $('adminModal').addEventListener('click',e=>{if(e.target===$('adminModal'))$('adminModal').hidden=true;});
+  $('saveSettings').addEventListener('click',()=>{
+    const latestDownloadUrl=$('editLatestUrl').value.trim(), repositoryUrl=$('editRepoUrl').value.trim();
+    if (!/^https?:\/\//i.test(latestDownloadUrl) || !/^https?:\/\//i.test(repositoryUrl)) { $('adminStatus').textContent='Укажи корректные ссылки, начинающиеся с https://'; return; }
+    const versions=parseVersions($('editVersions').value);
+    if (versions.some(v=>!v.mod||!v.minecraft||!/^https?:\/\//i.test(v.url))) { $('adminStatus').textContent='Проверь строки версий: в каждой нужна прямая ссылка http(s) на файл.'; return; }
+    settings={...settings,latestVersion:$('editLatestVersion').value.trim(),latestMinecraft:$('editLatestMinecraft').value.trim(),latestDownloadUrl,repositoryUrl,versions};
+    try { localStorage.setItem(storageKey,JSON.stringify(settings)); } catch (_) {}
+    render(); updateExport(); $('adminStatus').textContent='Сохранено в этом браузере. Для публикации для всех скопируй конфигурацию в config.js.';
   });
-  document.querySelectorAll('.faq-list details').forEach(detail => {
-    const marker = detail.querySelector('summary span');
-    const sync = () => { if (marker) marker.textContent = detail.open ? '−' : '+'; };
-    detail.addEventListener('toggle', sync); sync();
-  });
+  $('resetSettings').addEventListener('click',()=>{settings=defaults;try{localStorage.removeItem(storageKey);}catch(_){}render();fillForm();$('adminStatus').textContent='Настройки сброшены к config.js.';});
+  $('copyConfig').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('exportConfig').value);$('adminStatus').textContent='Конфигурация скопирована.';}catch(_){$('exportConfig').select();$('adminStatus').textContent='Выдели текст и скопируй вручную.';}});
+  render();
 })();

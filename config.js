@@ -1,12 +1,11 @@
-/*
-  НАСТРОЙКА САЙТА — поменяй эти значения под свой GitHub.
-  repoUrl: ссылка на репозиторий с исходным кодом.
-  releasesUrl: страница релизов, куда ты прикрепляешь готовый .jar.
-  version: версия, которую показываем на главной. Обновляй при новом релизе.
-*/
-window.WEBCAM_BUBBLES_SITE = {
-  repoUrl: "https://github.com/YOUR-USERNAME/WebcamBubbles",
-  releasesUrl: "https://github.com/YOUR-USERNAME/WebcamBubbles/releases/latest",
-  version: "1.2.4",
-  minecraft: "26.3"
+/* Основные настройки сайта DozaCraft. Замени ссылки на свои. */
+window.DOZACRAFT_CONFIG = {
+  projectName: 'DozaCraft',
+  latestVersion: '1.2.4',
+  latestMinecraft: '26.3',
+  latestDownloadUrl: 'https://github.com/YOUR-USERNAME/DozaCraft/releases/latest/download/webcambubbles-1.2.4.jar',
+  repositoryUrl: 'https://github.com/YOUR-USERNAME/DozaCraft',
+  versions: [
+    { mod: '1.2.4', minecraft: '26.3', loader: 'Fabric', url: 'https://github.com/YOUR-USERNAME/DozaCraft/releases/latest/download/webcambubbles-1.2.4.jar' }
+  ]
 };

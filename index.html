@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="WebcamBubbles — круглые веб-камеры над игроками в Minecraft 26.3. Скачать мод, посмотреть функции и инструкции по установке.">
+  <meta property="og:title" content="WebcamBubbles — камера ближе к игре">
+  <meta property="og:description" content="Круглые веб-камеры, гибкие настройки, поддержка Simple Voice Chat и инструменты сервера для Minecraft 26.3.">
+  <meta property="og:type" content="website">
+  <title>WebcamBubbles — камера ближе к игре</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="WebcamBubbles — на главную">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>webcam<span class="brand-light">bubbles</span><small>FABRIC MOD</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="#features">Возможности</a><a href="#install">Установка</a><a href="#commands">Команды</a><a href="#faq">FAQ</a>
+      <a class="nav-github" href="https://github.com/" id="navRepo" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.71 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.21 1.16-2.99-.12-.29-.5-1.42.11-2.95 0 0 .95-.3 3.05 1.14a10.6 10.6 0 0 1 5.56 0c2.1-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.66.11 2.95.72.78 1.16 1.77 1.16 2.99 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.02.76 2.06V22c0 .29.2.63.76.52A11.1 11.1 0 0 0 12 .9Z"/></svg> GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> MINECRAFT JAVA · FABRIC · 26.3</div>
+        <h1>Лицо команды.<br><span>Прямо в игре.</span></h1>
+        <p class="hero-lead">WebcamBubbles добавляет круглые веб-камеры над игроками — чтобы видеть реакцию друзей, а не только их никнеймы.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" id="downloadHero" href="https://github.com/" target="_blank" rel="noreferrer"><span class="button-icon">↓</span><span>Скачать мод<small id="heroVersion">Версия 1.2.4 · Minecraft 26.3</small></span></a>
+          <a class="button button-quiet" id="sourceHero" href="https://github.com/" target="_blank" rel="noreferrer"><span class="play-icon">↗</span> Исходный код</a>
+        </div>
+        <div class="hero-meta"><span><i class="meta-dot green"></i> Java 25+</span><span><i class="meta-dot blue"></i> Fabric</span><span><i class="meta-dot purple"></i> MIT License</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Иллюстрация интерфейса веб-камер в Minecraft">
+        <div class="visual-grid"></div>
+        <div class="hud-chip chip-top"><span class="chip-signal"></span> LIVE CAM <b>●</b></div>
+        <div class="game-window">
+          <div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span>DOZA CRAFT 3 <b>/</b> VOICE LOBBY</span><span class="window-status">ONLINE</span></div>
+          <div class="voxel-scene">
+            <div class="sun-glow"></div><div class="block-mountain mountain-back"></div><div class="block-mountain mountain-front"></div>
+            <div class="block-ground"></div><div class="block-tree tree-one"><i></i><b></b></div><div class="block-tree tree-two"><i></i><b></b></div>
+            <div class="pixel-player player-one"><i class="head"></i><i class="body"></i><i class="leg leg-a"></i><i class="leg leg-b"></i></div>
+            <div class="pixel-player player-two"><i class="head"></i><i class="body"></i><i class="leg leg-a"></i><i class="leg leg-b"></i></div>
+            <div class="crosshair"></div><div class="scene-label">OVERWORLD <span>XYZ 128 / 72 / -46</span></div>
+          </div>
+          <div class="cam-overlay cam-one"><div class="cam-ring"><div class="avatar avatar-a"><i class="hair"></i><i class="face"></i><i class="eye eye-a"></i><i class="eye eye-b"></i><i class="smile"></i></div><span class="cam-live"></span></div><span class="cam-name">Nikel <small>● LIVE</small></span></div>
+          <div class="cam-overlay cam-two"><div class="cam-ring"><div class="avatar avatar-b"><i class="hair"></i><i class="face"></i><i class="eye eye-a"></i><i class="eye eye-b"></i><i class="smile"></i></div><span class="cam-live"></span></div><span class="cam-name">Alex <small>● LIVE</small></span></div>
+          <div class="game-footer"><span>◉ 2 CAMERAS ACTIVE</span><span>V <b>CAMERA</b></span></div>
+        </div>
+        <div class="hud-chip chip-bottom"><span class="equalizer"><i></i><i></i><i></i><i></i></span> YOUR CREW, IN REAL TIME</div>
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+      </div>
+      <div class="hero-bottom-note"><span class="scroll-line"></span> ЛИСТАЙ НИЖЕ <span class="note-separator">/</span> ИЗУЧИ ВОЗМОЖНОСТИ</div>
+    </section>
+
+    <section class="ticker" aria-label="Ключевые характеристики"><div class="ticker-track"><span>WEBCAM OVERLAY</span><i>✳</i><span>LOW-LATENCY UDP</span><i>✳</i><span>SIMPLE VOICE CHAT</span><i>✳</i><span>SERVER TOOLS</span><i>✳</i><span>WEBCAM OVERLAY</span><i>✳</i><span>LOW-LATENCY UDP</span><i>✳</i><span>SIMPLE VOICE CHAT</span><i>✳</i><span>SERVER TOOLS</span><i>✳</i></div></section>
+
+    <section class="section wrap" id="features">
+      <div class="section-heading"><div><div class="eyebrow">01 / ЧТО ВНУТРИ</div><h2>Не просто камера.<br><span>Часть игрового опыта.</span></h2></div><p>Настройки без копания в файлах, понятный статус трансляции и сетевой транспорт, который умеет работать вместе с голосовым чатом.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card feature-large"><div class="feature-top"><span class="feature-index">01</span><span class="feature-icon camera-icon">◉</span></div><div class="feature-art camera-art"><div class="art-face face-left"><i></i></div><div class="art-face face-right"><i></i></div><div class="art-connection"></div><span class="art-tag">LIVE</span></div><h3>Круглые вебки</h3><p>Изображение игроков в компактных круглых окнах. Видно, кто говорит, смеётся или удивляется — и всё это остаётся частью игрового пространства.</p><div class="tag-row"><span>Превью</span><span>Обводка</span><span>Прозрачность</span></div></article>
+        <article class="feature-card"><div class="feature-top"><span class="feature-index">02</span><span class="feature-icon sliders-icon">☷</span></div><div class="mini-settings"><div class="mini-setting-head"><span>CAMERA SETTINGS</span><span class="mini-on">ON</span></div><div class="mini-line"><span>Качество</span><div class="mini-slider"><i style="width:76%"></i></div><b>0.8</b></div><div class="mini-line"><span>Размер</span><div class="mini-slider"><i style="width:57%"></i></div><b>128</b></div><div class="mini-line"><span>FPS</span><div class="mini-pills"><i>15</i><i>20</i><b>30</b></div></div></div><h3>Настройка в пару кликов</h3><p>Открой GUI клавишей G: камера, FPS, разрешение, качество JPEG, размер, цвет и прозрачность обводки.</p><div class="tag-row"><span>GUI</span><span>Горячие клавиши</span></div></article>
+        <article class="feature-card"><div class="feature-top"><span class="feature-index">03</span><span class="feature-icon network-icon">⌁</span></div><div class="network-art"><div class="network-node node-a">CAM</div><div class="network-node node-b">UDP</div><div class="network-node node-c">SVC</div><div class="network-line line-a"></div><div class="network-line line-b"></div><div class="network-line line-c"></div><span>WCB1</span></div><h3>Умный сетевой режим</h3><p>При совместимом Simple Voice Chat мод может использовать общий UDP-сокет. Если интеграция недоступна, предусмотрен отдельный UDP-порт.</p><div class="tag-row"><span>UDP</span><span>Simple Voice Chat</span></div></article>
+        <article class="feature-card"><div class="feature-top"><span class="feature-index">04</span><span class="feature-icon shield-icon">◇</span></div><div class="privacy-art"><div class="privacy-ring"><span>LOCAL<br><b>FIRST</b></span></div><div class="privacy-points"><span><i></i> Без стороннего сервиса</span><span><i></i> Кадры не пишутся на диск</span><span><i></i> Контроль трансляции</span></div></div><h3>Приватность — не опция</h3><p>Кадры передаются участникам через ваш сервер, не отправляются в сторонние облака и не сохраняются модом на диск.</p><div class="tag-row"><span>Приватный сервер</span><span>Согласие игроков</span></div></article>
+        <article class="feature-card feature-accent"><div class="feature-top"><span class="feature-index">05</span><span class="feature-icon terminal-icon">&gt;_</span></div><div class="terminal-art"><div><b>$</b> /webcam toggle</div><div><b>✓</b> camera state: <em>enabled</em></div><div><b>$</b> /webcam debug</div><div><b>↳</b> fps 30 · quality 0.8</div></div><h3>Управление командой</h3><p>Включай камеру, выбирай устройство и проверяй текущие параметры прямо из чата или консоли сервера.</p><a href="#commands" class="text-link">Все команды <span>↗</span></a></article>
+        <article class="feature-card"><div class="feature-top"><span class="feature-index">06</span><span class="feature-icon world-icon">▦</span></div><div class="world-art"><div class="world-block b1"></div><div class="world-block b2"></div><div class="world-block b3"></div><div class="world-block b4"></div><div class="world-label">OVERWORLD <span>↗</span></div></div><h3>Инструменты сервера</h3><p>В сборке есть серверные команды и дополнительные функции, включая управление доступом к измерениям. Конкретные функции зависят от настроек.</p><div class="tag-row"><span>Сервер</span><span>Конфигурация</span></div></article>
+      </div>
+    </section>
+
+    <section class="spec-band"><div class="wrap spec-inner"><div><div class="eyebrow">СОВМЕСТИМОСТЬ</div><h2>Собрано под <span>26.3</span></h2><p>Проверь версии зависимостей перед установкой на сервер.</p></div><div class="spec-list"><div><span>Игра</span><b>Minecraft Java 26.3</b></div><div><span>Загрузчик</span><b>Fabric Loader 0.19.5+</b></div><div><span>Java</span><b>Java 25+</b></div><div><span>API</span><b>Fabric API 26.3</b></div><div><span>Дополнительно</span><b>Simple Voice Chat — опционально</b></div></div></div></section>
+
+    <section class="section wrap" id="install">
+      <div class="section-heading"><div><div class="eyebrow">02 / НАЧАЛО РАБОТЫ</div><h2>Установить.<br><span>Подключиться. Готово.</span></h2></div><p>WebcamBubbles должен быть установлен на сервере и на каждом клиенте, который хочет отправлять или видеть камеры.</p></div>
+      <div class="install-layout"><div class="install-steps"><article class="install-step"><span class="step-number">01</span><div><h3>Подготовь Fabric</h3><p>Установи Minecraft Java 26.3, Java 25+, Fabric Loader и совместимую версию Fabric API.</p><span class="step-status">ОБЯЗАТЕЛЬНО</span></div></article><article class="install-step"><span class="step-number">02</span><div><h3>Добавь мод в обе стороны</h3><p>Помести <code>webcambubbles-1.2.4.jar</code> в папку <code>mods/</code> на сервере и на клиентах. Перезапусти игру и сервер.</p><span class="step-status">СЕРВЕР + КЛИЕНТ</span></div></article><article class="install-step"><span class="step-number">03</span><div><h3>Запусти камеру</h3><p>Нажми <kbd>V</kbd>, чтобы включить или выключить трансляцию. Нажми <kbd>G</kbd>, чтобы открыть настройки камеры.</p><span class="step-status">ГОТОВО</span></div></article><article class="install-step"><span class="step-number">04</span><div><h3>Проверь сеть</h3><p>Без Simple Voice Chat настрой UDP-порт из конфига (по умолчанию 25566). С Simple Voice Chat мод пытается использовать его UDP-сокет автоматически.</p><span class="step-status">ЕСЛИ НУЖНО</span></div></article></div>
+        <aside class="install-side"><div class="download-panel"><div class="panel-label"><span class="pulse"></span> CURRENT RELEASE</div><div class="release-version" id="releaseVersion">v1.2.4</div><p>WebcamBubbles for Minecraft Java 26.3</p><div class="release-line"><span>Формат</span><b>.JAR</b></div><div class="release-line"><span>Загрузчик</span><b>Fabric</b></div><div class="release-line"><span>Лицензия</span><b>MIT</b></div><a class="button button-primary full-button" id="downloadPanel" href="https://github.com/" target="_blank" rel="noreferrer">Перейти к скачиванию <span>↗</span></a><p class="panel-note">Скачивай JAR из раздела Releases своего GitHub-репозитория. Не клади исходный ZIP вместо файла мода.</p></div><div class="tip-panel"><span class="tip-icon">i</span><div><b>Первый запуск</b><p>После первого старта появится <code>config/webcambubbles.json</code>. Останови игру перед ручным редактированием конфига.</p></div></div></aside></div>
+    </section>
+
+    <section class="section commands-section" id="commands"><div class="wrap"><div class="section-heading"><div><div class="eyebrow">03 / БЫСТРОЕ УПРАВЛЕНИЕ</div><h2>Твои команды.<br><span>Твой контроль.</span></h2></div><p>Нажми на команду, чтобы скопировать её. Команды доступны там, где разрешено выполнение соответствующей команды.</p></div>
+      <div class="command-shell"><div class="command-tabs"><span class="tab-active">WEBCAM COMMANDS</span><span>IN-GAME / SERVER</span><div class="command-search"><span>⌕</span><input id="commandSearch" type="search" placeholder="Найти команду…" aria-label="Поиск команд"></div></div><div class="command-list" id="commandList">
+        <button class="command-row" data-command="/webcam gui"><span class="command-symbol">↗</span><span class="command-info"><b>/webcam gui</b><small>Открыть окно настроек</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam toggle"><span class="command-symbol">◉</span><span class="command-info"><b>/webcam toggle</b><small>Включить или выключить веб-камеру</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam reload"><span class="command-symbol">⟳</span><span class="command-info"><b>/webcam reload</b><small>Перечитать конфигурацию</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam camera 0"><span class="command-symbol">▣</span><span class="command-info"><b>/webcam camera &lt;index&gt;</b><small>Выбрать устройство камеры, например index 0</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam fps 30"><span class="command-symbol">◷</span><span class="command-info"><b>/webcam fps &lt;30|20|15&gt;</b><small>Задать целевой FPS</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam quality 0.8"><span class="command-symbol">◈</span><span class="command-info"><b>/webcam quality &lt;0.4–0.95&gt;</b><small>Настроить качество JPEG</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam resolution 128"><span class="command-symbol">▧</span><span class="command-info"><b>/webcam resolution &lt;64|128|256|512&gt;</b><small>Изменить разрешение кадра</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+        <button class="command-row" data-command="/webcam debug"><span class="command-symbol">⌁</span><span class="command-info"><b>/webcam debug</b><small>Посмотреть FPS и текущие параметры</small></span><span class="command-copy">Копировать <i>⧉</i></span></button>
+      </div><div class="command-footer"><span><i class="meta-dot green"></i> 8 команд в справочнике</span><span id="copyStatus" role="status" aria-live="polite">Нажми на строку, чтобы скопировать</span></div></div>
+    </div></section>
+
+    <section class="section wrap" id="faq"><div class="section-heading"><div><div class="eyebrow">04 / FAQ</div><h2>Коротко <span>о главном.</span></h2></div><p>Ответы на вопросы, которые возникают при первой установке.</p></div><div class="faq-list">
+      <details><summary>Нужно ли ставить мод на сервер? <span>+</span></summary><p>Да. Установи WebcamBubbles на сервер и на каждый клиент, который должен отправлять или отображать веб-камеры.</p></details>
+      <details><summary>Обязателен ли Simple Voice Chat? <span>+</span></summary><p>Нет, это необязательная интеграция. Если SVC установлен и его сокет доступен, мод пытается использовать общий UDP-транспорт. Иначе используется отдельный UDP-порт.</p></details>
+      <details><summary>Почему не видно камеру другого игрока? <span>+</span></summary><p>Проверь, что обе стороны используют совместимые версии мода, игрок включил трансляцию, а сетевой UDP-транспорт доступен. Если SVC не установлен, проверь порт из конфига и правила файрвола.</p></details>
+      <details><summary>Куда загружать новые версии мода? <span>+</span></summary><p>В GitHub-репозитории открой Releases → Draft a new release, создай тег версии и прикрепи собранный JAR. Сайт ведёт на страницу последнего релиза. Сам GitHub Pages не принимает файлы в репозиторий через обычную форму сайта.</p></details>
+      <details><summary>Безопасно ли использовать мод на публичном сервере? <span>+</span></summary><p>Мод задуман для приватных серверов, где участники знают о трансляции и согласны с ней. Не используй веб-камеры для скрытой записи или без согласия игроков.</p></details>
+      <details><summary>Где лежат настройки? <span>+</span></summary><p>После первого запуска открой <code>config/webcambubbles.json</code>. Большинство настроек камеры также доступны через клавишу G.</p></details>
+    </div></section>
+
+    <section class="final-cta"><div class="cta-glow"></div><div class="wrap cta-inner"><div class="eyebrow">YOUR SERVER. YOUR PEOPLE.</div><h2>Играй вместе.<br><span>Видь больше.</span></h2><p>Скачай WebcamBubbles и добавь живые реакции в свой Minecraft-мир.</p><div class="hero-actions"><a class="button button-primary" id="downloadBottom" href="https://github.com/" target="_blank" rel="noreferrer">Скачать последнюю версию <span>↗</span></a><a class="button button-quiet" href="#install">Как установить ↓</a></div><div class="cta-footnote">MINECRAFT JAVA 26.3 <span>·</span> FABRIC <span>·</span> OPEN SOURCE</div></div></section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-main"><a class="brand" href="#top"><span class="brand-mark"><span></span><span></span><span></span></span><span>webcam<span class="brand-light">bubbles</span><small>FABRIC MOD</small></span></a><p>Сделано для тех, с кем хочется играть.</p><div class="footer-links"><a href="#features">Возможности</a><a href="#install">Установка</a><a id="footerRepo" href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a></div></div><div class="wrap footer-bottom"><span>© <span id="year">2026</span> WebcamBubbles · MIT</span><span>Minecraft is a trademark of Mojang Studios. This project is not affiliated with Mojang or Microsoft.</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script><script src="script.js"></script>
+</body>
+</html>

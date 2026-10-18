@@ -1,0 +1,10 @@
+name = "dozacraft-admin-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[[kv_namespaces]]
+binding = "CONFIG_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+[vars]
+SITE_ORIGIN = "https://YOUR-USERNAME.github.io"

@@ -9,6 +9,18 @@
   let settings = defaults;
   try { const saved = localStorage.getItem(storageKey); if (saved) settings = {...defaults, ...JSON.parse(saved)}; } catch (_) {}
   const $ = id => document.getElementById(id);
+  // Convenience gate for this static GitHub Pages site (not server-side authentication).
+  const ADMIN_USERNAME = 'dozacraft_admin';
+  const ADMIN_PASSWORD = 'DozaPanel-4827!';
+  let isAdminAuthenticated = false;
+  function showAdminLogin() {
+    isAdminAuthenticated = false;
+    $('adminLogin').hidden = false;
+    $('adminContent').hidden = true;
+    $('adminUsername').value = '';
+    $('adminPassword').value = '';
+    $('loginStatus').textContent = '';
+  }
   const safeUrl = (url, fallback='#versions') => { try { const u = new URL(url, location.href); return ['https:','http:'].includes(u.protocol) ? u.href : fallback; } catch (_) { return fallback; } };
   function render() {
     $('latestVersion').textContent = settings.latestVersion;
@@ -29,7 +41,28 @@
   }
   function parseVersions(text) { return text.split('\n').map(line=>line.trim()).filter(Boolean).map(line=>{const [mod,minecraft,loader,url]=line.split('|').map(s=>s.trim());return {mod,minecraft,loader:loader||'Fabric',url:url||'#versions'};}); }
   function updateExport() { const cfg={...settings}; $('exportConfig').value='window.DOZACRAFT_CONFIG = '+JSON.stringify(cfg,null,2)+';'; }
-  $('adminOpen').addEventListener('click',()=>{fillForm();$('adminModal').hidden=false;});
+  $('adminOpen').addEventListener('click',()=>{
+    $('adminModal').hidden=false;
+    if (isAdminAuthenticated) { fillForm(); $('adminLogin').hidden=true; $('adminContent').hidden=false; }
+    else showAdminLogin();
+  });
+  $('adminLoginForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const username = $('adminUsername').value.trim();
+    const password = $('adminPassword').value;
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      isAdminAuthenticated = true;
+      $('adminLogin').hidden = true;
+      $('adminContent').hidden = false;
+      $('loginStatus').textContent = '';
+      fillForm();
+    } else {
+      $('loginStatus').textContent = 'Неверное имя пользователя или пароль.';
+      $('adminPassword').value = '';
+      $('adminPassword').focus();
+    }
+  });
+  $('adminLogout').addEventListener('click', () => { showAdminLogin(); $('adminContent').hidden = true; });
   $('adminClose').addEventListener('click',()=>$('adminModal').hidden=true);
   $('adminModal').addEventListener('click',e=>{if(e.target===$('adminModal'))$('adminModal').hidden=true;});
   $('saveSettings').addEventListener('click',()=>{
